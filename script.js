@@ -38,6 +38,7 @@ const checkWin = () => {
         [0, 4, 8],
         [2, 4, 6],
     ]
+    let someoneWon = false
     wins.forEach(e => {
         if (
             (boxText[e[0]].innerText === boxText[e[1]].innerText) &&
@@ -49,8 +50,18 @@ const checkWin = () => {
             document.querySelector(".imgBox").getElementsByTagName("img")[0].style.transition = "1s all ease-in-out";
             gameOver.play()
             isgameOver = true
+            someoneWon = true
         }
     });
+
+    if (!someoneWon) {
+        let filledBoxes = Array.from(boxText).filter(box => box.innerText !== "");
+        if (filledBoxes.length === 9) {
+            document.querySelector('.info').innerText = "It's a Draw!";
+            isgameOver = true;
+            gameOver.play()
+        }
+    }
 
 
 }
